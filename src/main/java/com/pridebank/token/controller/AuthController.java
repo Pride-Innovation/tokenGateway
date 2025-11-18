@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -77,6 +78,103 @@ public class AuthController {
                             .build());
         }
     }
+
+
+    /**
+     * OAuth-style Login endpoint - Authenticates with ESB using form-urlencoded
+     * POST /api/auth/login/xml
+     * Content-Type: application/x-www-form-urlencoded
+     * <p>
+     * Accepts:
+     * - grant_type: The type of grant being requested
+     * - client_id: The client ID (used as username)
+     * - client_secret: The client secret (used as password)
+     */
+    @PostMapping(
+            value = "/login/xml",
+            consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<AuthResponse> loginWithFormData(
+            @RequestParam("grant_type") String grantType,
+            @RequestParam("client_id") String clientId,
+            @RequestParam("client_secret") String clientSecret
+    ) {
+        log.info("OAuth-style login attempt for client_id: {} with grant_type: {}", clientId, grantType);
+
+        System.out.println("user name::" + clientId);
+        System.out.println("password::" + clientSecret);
+
+        try {
+            // Validate grant_type
+            if (grantType == null || grantType.trim().isEmpty()) {
+                log.warn("Missing grant_type parameter");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(AuthResponse.builder()
+                                .message("grant_type is required")
+                                .build());
+            }
+
+            // Validate client_id
+            if (clientId == null || clientId.trim().isEmpty()) {
+                log.warn("Missing client_id parameter");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(AuthResponse.builder()
+                                .message("client_id is required")
+                                .build());
+            }
+
+            // Validate client_secret
+            if (clientSecret == null || clientSecret.trim().isEmpty()) {
+                log.warn("Missing client_secret parameter");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(AuthResponse.builder()
+                                .message("client_secret is required")
+                                .build());
+            }
+
+            // Use client_id as username and client_secret as password
+
+            log.debug("Attempting ESB authentication for client: {}", clientId);
+
+            // Authenticate with ESB platform
+            boolean isAuthenticated = esbAuthService.authenticateWithESB(clientId, clientSecret);
+
+            if (!isAuthenticated) {
+                log.warn("Authentication failed for client_id: {}", clientId);
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(AuthResponse.builder()
+                                .message("Invalid client credentials")
+                                .build());
+            }
+
+            // Generate JWT token with embedded credentials
+            String token = tokenProvider.generateToken(clientId, clientSecret);
+
+            log.info("OAuth-style authentication successful for client_id: {}", clientId);
+
+            return ResponseEntity.ok(AuthResponse.builder()
+                    .authToken(token)
+                    .tokenType("Bearer")
+                    .expiresIn(tokenProvider.getExpirationMs())
+                    .message("Authentication successful")
+                    .build());
+
+        } catch (AuthenticationFailedException ex) {
+            log.error("OAuth authentication failed: {}", ex.getMessage());
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                    .body(AuthResponse.builder()
+                            .message(ex.getMessage())
+                            .build());
+        } catch (Exception ex) {
+            log.error("Unexpected error during OAuth authentication", ex);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(AuthResponse.builder()
+                            .message("An unexpected error occurred")
+                            .build());
+        }
+    }
+
 
     /**
      * Verify account number endpoint
