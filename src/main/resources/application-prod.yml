@@ -1,0 +1,39 @@
+server:
+  port: ${SERVER_PORT:8443}
+  ssl:
+    enabled: true
+    key-store: ${SSL_KEYSTORE_PATH}
+    key-store-password: ${SSL_KEYSTORE_PASSWORD}
+    key-store-type: PKCS12
+
+# JWT Configuration (use environment variables)
+jwt:
+  secret: ${JWT_SECRET}
+  expiration: ${JWT_EXPIRATION:3600000}
+
+# ESB Configuration (production)
+esb:
+  base-url: ${ESB_BASE_URL}
+  auth-endpoint: ${ESB_AUTH_ENDPOINT:/Token/Authentication}
+  connection-timeout: ${ESB_CONNECT_TIMEOUT:10000}
+  read-timeout: ${ESB_READ_TIMEOUT:30000}
+
+# Feign Configuration (production)
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 10000
+        readTimeout: 30000
+        loggerLevel: basic
+
+# Logging (production - less verbose)
+logging:
+  level:
+    root: WARN
+    com.pridebank.token: INFO
+    feign: INFO
+  file:
+    name: /var/log/token-gateway/application.log
+    max-size: 10MB
+    max-history: 30
