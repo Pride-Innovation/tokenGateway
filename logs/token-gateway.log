@@ -1,0 +1,354 @@
+2025-11-19 10:04:29 [main] INFO  c.p.token.TokenGatewayApplication - Starting TokenGatewayApplication using Java 20.0.2.1 with PID 4156 (C:\Users\sodong\Projects\token-gateway\target\classes started by sodong in C:\Users\sodong\Projects\token-gateway)
+2025-11-19 10:04:29 [main] DEBUG c.p.token.TokenGatewayApplication - Running with Spring Boot v3.1.5, Spring v6.0.13
+2025-11-19 10:04:29 [main] INFO  c.p.token.TokenGatewayApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-19 10:04:30 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=0c3359fc-815a-39e8-9852-7d6fbb285282
+2025-11-19 10:04:30 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'com.pridebank.token.client.ESBClient' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-11-19 10:04:30 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2025-11-19 10:04:30 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-19 10:04:30 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.15]
+2025-11-19 10:04:30 [main] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2025-11-19 10:04:30 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1482 ms
+2025-11-19 10:04:30 [main] DEBUG c.p.t.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-11-19 10:04:30 [main] WARN  c.p.token.client.ESBFeignConfig - ⚠️  SSL verification disabled - DO NOT USE IN PRODUCTION
+2025-11-19 10:04:30 [main] WARN  c.p.token.client.ESBFeignConfig - ⚠️  SSL verification disabled - DO NOT USE IN PRODUCTION
+2025-11-19 10:04:31 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: eeb1168c-1c13-4947-aec1-0c11b165b432
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-19 10:04:31 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-11-19 10:04:31 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1002d192, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@9281d19, org.springframework.security.web.context.SecurityContextHolderFilter@587f4f63, org.springframework.security.web.header.HeaderWriterFilter@987a0bb, org.springframework.security.web.authentication.logout.LogoutFilter@5323999f, com.pridebank.token.security.JwtAuthenticationFilter@64bebd55, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6fb0261e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7f426ddd, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@36ad5f2a, org.springframework.security.web.session.SessionManagementFilter@532dacf5, org.springframework.security.web.access.ExceptionTranslationFilter@ee96866, org.springframework.security.web.access.intercept.AuthorizationFilter@5fd8dd66]
+2025-11-19 10:04:31 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/api'
+2025-11-19 10:04:31 [main] INFO  c.p.token.TokenGatewayApplication - Started TokenGatewayApplication in 3.696 seconds (process running for 4.153)
+2025-11-19 10:04:38 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-19 10:04:38 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-19 10:04:38 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-11-19 10:04:38 [http-nio-8080-exec-1] INFO  c.p.token.controller.AuthController - Deposit/charge request received
+2025-11-19 10:04:38 [http-nio-8080-exec-1] DEBUG c.p.token.controller.AuthController - Successfully extracted credentials from token for user: admin
+2025-11-19 10:04:38 [http-nio-8080-exec-1] DEBUG c.p.token.controller.AuthController - Processing deposit for user: admin
+2025-11-19 10:04:38 [http-nio-8080-exec-1] INFO  c.p.t.s.ESBAuthenticationService - Validating Debit account number 217205102392301 for user: admin
+2025-11-19 10:04:38 [http-nio-8080-exec-1] DEBUG feign.template.Template - Explicit slash decoding specified, decoding all slashes in uri
+2025-11-19 10:04:38 [http-nio-8080-exec-1] DEBUG c.p.token.client.ESBFeignConfig - Feign Request: POST /Charge/card
+2025-11-19 10:04:38 [http-nio-8080-exec-1] DEBUG c.p.token.client.ESBFeignConfig - Headers: {Accept=[application/json], Authorization=[Basic YWRtaW46cXdlcnR5QDA5ODc2], Content-Length=[399], Content-Type=[application/json]}
+2025-11-19 10:04:38 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] ---> POST https://ESB-TEST2-PR.PRIDE.CO.UG:1984/restgateway/services/Charge/card HTTP/1.1
+2025-11-19 10:04:38 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Accept: application/json
+2025-11-19 10:04:38 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Authorization: Basic YWRtaW46cXdlcnR5QDA5ODc2
+2025-11-19 10:04:38 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Content-Length: 399
+2025-11-19 10:04:38 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Content-Type: application/json
+2025-11-19 10:04:38 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] 
+2025-11-19 10:04:38 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] {"debit_account":"217205102392301","currency":"UGX","narration":"TEST","transaction_id":"TRX1729094098045","branch":"B012435","userauthtoken":"eyJhbGciOiJIUzUxMiJ9.eyJjcmVkZW50aWFscyI6IllXUnRhVzQ2Y1hkbGNuUjVRREE1T0RjMiIsInVzZXJuYW1lIjoiYWRtaW4iLCJzdWIiOiJhZG1pbiIsImlhdCI6MTc2MzUzNDQ3MywiZXhwIjoxNzYzNTM4MDczfQ.sxTMJM_bCrzRDVI_-QoWlFtwMv78LEHnSaJ-FK46gmFJhY-OxU9IAoseZONzAqxNi66Pcid7QwYIgnUljbwVBA"}
+2025-11-19 10:04:38 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] ---> END HTTP (399-byte body)
+2025-11-19 10:04:39 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] <--- HTTP/1.1 200 OK (1130ms)
+2025-11-19 10:04:39 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] cache-control: no-cache, no-store, must-revalidate
+2025-11-19 10:04:39 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] content-length: 101
+2025-11-19 10:04:39 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] content-security-policy: default-src 'self' pride.co.ug *.pride.co.ug
+2025-11-19 10:04:39 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] content-type: application/json
+2025-11-19 10:04:39 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] date: Wed, 19 Nov 2025 06:56:16 GMT
+2025-11-19 10:04:39 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] strict-transport-security: max-age=86400, includeSubDomains
+2025-11-19 10:04:39 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] x-content-type-options: nosniff
+2025-11-19 10:04:39 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] x-frame-options: SAMEORIGIN
+2025-11-19 10:04:39 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] 
+2025-11-19 10:04:39 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] {"description":"FAILED","code":"902","transaction_id":"","ft":"","reason":"transaction already used"}
+2025-11-19 10:04:39 [http-nio-8080-exec-1] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] <--- END HTTP (101-byte body)
+2025-11-19 10:04:39 [http-nio-8080-exec-1] INFO  c.p.t.s.ESBAuthenticationService - Account charging successful for account: 217205102392301
+2025-11-19 10:04:39 [http-nio-8080-exec-1] DEBUG c.p.t.s.ESBAuthenticationService - Account charging response: ChargeResponse(code=902, description=FAILED, transaction_id=, ft=, reason=transaction already used)
+2025-11-19 10:04:45 [http-nio-8080-exec-4] INFO  c.p.token.controller.AuthController - Deposit/charge request received
+2025-11-19 10:04:45 [http-nio-8080-exec-4] DEBUG c.p.token.controller.AuthController - Successfully extracted credentials from token for user: admin
+2025-11-19 10:04:45 [http-nio-8080-exec-4] DEBUG c.p.token.controller.AuthController - Processing deposit for user: admin
+2025-11-19 10:04:45 [http-nio-8080-exec-4] INFO  c.p.t.s.ESBAuthenticationService - Validating Debit account number 217205102392301 for user: admin
+2025-11-19 10:04:45 [http-nio-8080-exec-4] DEBUG feign.template.Template - Explicit slash decoding specified, decoding all slashes in uri
+2025-11-19 10:04:45 [http-nio-8080-exec-4] DEBUG c.p.token.client.ESBFeignConfig - Feign Request: POST /Charge/card
+2025-11-19 10:04:45 [http-nio-8080-exec-4] DEBUG c.p.token.client.ESBFeignConfig - Headers: {Accept=[application/json], Authorization=[Basic YWRtaW46cXdlcnR5QDA5ODc2], Content-Length=[399], Content-Type=[application/json]}
+2025-11-19 10:04:45 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] ---> POST https://ESB-TEST2-PR.PRIDE.CO.UG:1984/restgateway/services/Charge/card HTTP/1.1
+2025-11-19 10:04:45 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Accept: application/json
+2025-11-19 10:04:45 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Authorization: Basic YWRtaW46cXdlcnR5QDA5ODc2
+2025-11-19 10:04:45 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Content-Length: 399
+2025-11-19 10:04:45 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Content-Type: application/json
+2025-11-19 10:04:45 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] 
+2025-11-19 10:04:45 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] {"debit_account":"217205102392301","currency":"UGX","narration":"TEST","transaction_id":"TRX1729094098675","branch":"B012435","userauthtoken":"eyJhbGciOiJIUzUxMiJ9.eyJjcmVkZW50aWFscyI6IllXUnRhVzQ2Y1hkbGNuUjVRREE1T0RjMiIsInVzZXJuYW1lIjoiYWRtaW4iLCJzdWIiOiJhZG1pbiIsImlhdCI6MTc2MzUzNDQ3MywiZXhwIjoxNzYzNTM4MDczfQ.sxTMJM_bCrzRDVI_-QoWlFtwMv78LEHnSaJ-FK46gmFJhY-OxU9IAoseZONzAqxNi66Pcid7QwYIgnUljbwVBA"}
+2025-11-19 10:04:45 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] ---> END HTTP (399-byte body)
+2025-11-19 10:04:50 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] <--- HTTP/1.1 200 OK (5188ms)
+2025-11-19 10:04:50 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] cache-control: no-cache, no-store, must-revalidate
+2025-11-19 10:04:50 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] content-length: 102
+2025-11-19 10:04:50 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] content-security-policy: default-src 'self' pride.co.ug *.pride.co.ug
+2025-11-19 10:04:50 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] content-type: application/json
+2025-11-19 10:04:50 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] date: Wed, 19 Nov 2025 06:56:23 GMT
+2025-11-19 10:04:50 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] strict-transport-security: max-age=86400, includeSubDomains
+2025-11-19 10:04:50 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] x-content-type-options: nosniff
+2025-11-19 10:04:50 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] x-frame-options: SAMEORIGIN
+2025-11-19 10:04:50 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] 
+2025-11-19 10:04:50 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] {"code":"00","description":"SUCCESS","transaction_id":"TRX1729094098675","ft":"991863518","reason":""}
+2025-11-19 10:04:50 [http-nio-8080-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] <--- END HTTP (102-byte body)
+2025-11-19 10:04:50 [http-nio-8080-exec-4] INFO  c.p.t.s.ESBAuthenticationService - Account charging successful for account: 217205102392301
+2025-11-19 10:04:50 [http-nio-8080-exec-4] DEBUG c.p.t.s.ESBAuthenticationService - Account charging response: ChargeResponse(code=00, description=SUCCESS, transaction_id=TRX1729094098675, ft=991863518, reason=)
+2025-11-19 10:05:03 [http-nio-8080-exec-6] INFO  c.p.token.controller.AuthController - Deposit/charge request received
+2025-11-19 10:05:03 [http-nio-8080-exec-6] DEBUG c.p.token.controller.AuthController - Successfully extracted credentials from token for user: admin
+2025-11-19 10:05:03 [http-nio-8080-exec-6] DEBUG c.p.token.controller.AuthController - Processing deposit for user: admin
+2025-11-19 10:05:03 [http-nio-8080-exec-6] INFO  c.p.t.s.ESBAuthenticationService - Validating Debit account number 217205102392301 for user: admin
+2025-11-19 10:05:03 [http-nio-8080-exec-6] DEBUG feign.template.Template - Explicit slash decoding specified, decoding all slashes in uri
+2025-11-19 10:05:03 [http-nio-8080-exec-6] DEBUG c.p.token.client.ESBFeignConfig - Feign Request: POST /Charge/card
+2025-11-19 10:05:03 [http-nio-8080-exec-6] DEBUG c.p.token.client.ESBFeignConfig - Headers: {Accept=[application/json], Authorization=[Basic YWRtaW46cXdlcnR5QDA5ODc2], Content-Length=[399], Content-Type=[application/json]}
+2025-11-19 10:05:03 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] ---> POST https://ESB-TEST2-PR.PRIDE.CO.UG:1984/restgateway/services/Charge/card HTTP/1.1
+2025-11-19 10:05:03 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Accept: application/json
+2025-11-19 10:05:03 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Authorization: Basic YWRtaW46cXdlcnR5QDA5ODc2
+2025-11-19 10:05:03 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Content-Length: 399
+2025-11-19 10:05:03 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Content-Type: application/json
+2025-11-19 10:05:03 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] 
+2025-11-19 10:05:03 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] {"debit_account":"217205102392301","currency":"UGX","narration":"TEST","transaction_id":"TRX1729094098675","branch":"B012435","userauthtoken":"eyJhbGciOiJIUzUxMiJ9.eyJjcmVkZW50aWFscyI6IllXUnRhVzQ2Y1hkbGNuUjVRREE1T0RjMiIsInVzZXJuYW1lIjoiYWRtaW4iLCJzdWIiOiJhZG1pbiIsImlhdCI6MTc2MzUzNDQ3MywiZXhwIjoxNzYzNTM4MDczfQ.sxTMJM_bCrzRDVI_-QoWlFtwMv78LEHnSaJ-FK46gmFJhY-OxU9IAoseZONzAqxNi66Pcid7QwYIgnUljbwVBA"}
+2025-11-19 10:05:03 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] ---> END HTTP (399-byte body)
+2025-11-19 10:05:04 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] <--- HTTP/1.1 200 OK (658ms)
+2025-11-19 10:05:04 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] cache-control: no-cache, no-store, must-revalidate
+2025-11-19 10:05:04 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] content-length: 101
+2025-11-19 10:05:04 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] content-security-policy: default-src 'self' pride.co.ug *.pride.co.ug
+2025-11-19 10:05:04 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] content-type: application/json
+2025-11-19 10:05:04 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] date: Wed, 19 Nov 2025 06:56:41 GMT
+2025-11-19 10:05:04 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] strict-transport-security: max-age=86400, includeSubDomains
+2025-11-19 10:05:04 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] x-content-type-options: nosniff
+2025-11-19 10:05:04 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] x-frame-options: SAMEORIGIN
+2025-11-19 10:05:04 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] 
+2025-11-19 10:05:04 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] {"description":"FAILED","code":"902","transaction_id":"","ft":"","reason":"transaction already used"}
+2025-11-19 10:05:04 [http-nio-8080-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] <--- END HTTP (101-byte body)
+2025-11-19 10:05:04 [http-nio-8080-exec-6] INFO  c.p.t.s.ESBAuthenticationService - Account charging successful for account: 217205102392301
+2025-11-19 10:05:04 [http-nio-8080-exec-6] DEBUG c.p.t.s.ESBAuthenticationService - Account charging response: ChargeResponse(code=902, description=FAILED, transaction_id=, ft=, reason=transaction already used)
+2025-11-19 10:05:38 [main] INFO  c.p.token.TokenGatewayApplication - Starting TokenGatewayApplication using Java 20.0.2.1 with PID 15868 (C:\Users\sodong\Projects\token-gateway\target\classes started by sodong in C:\Users\sodong\Projects\token-gateway)
+2025-11-19 10:05:38 [main] DEBUG c.p.token.TokenGatewayApplication - Running with Spring Boot v3.1.5, Spring v6.0.13
+2025-11-19 10:05:38 [main] INFO  c.p.token.TokenGatewayApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-19 10:05:39 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=0c3359fc-815a-39e8-9852-7d6fbb285282
+2025-11-19 10:05:39 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'com.pridebank.token.client.ESBClient' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-11-19 10:05:40 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 7780 (http)
+2025-11-19 10:05:40 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-19 10:05:40 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.15]
+2025-11-19 10:05:40 [main] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2025-11-19 10:05:40 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1491 ms
+2025-11-19 10:05:40 [main] DEBUG c.p.t.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-11-19 10:05:40 [main] WARN  c.p.token.client.ESBFeignConfig - ⚠️  SSL verification disabled - DO NOT USE IN PRODUCTION
+2025-11-19 10:05:40 [main] WARN  c.p.token.client.ESBFeignConfig - ⚠️  SSL verification disabled - DO NOT USE IN PRODUCTION
+2025-11-19 10:05:40 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: c189a8b6-091e-4641-8ab6-e8f8bb17eee2
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-19 10:05:40 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-11-19 10:05:40 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@36ad5f2a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@53cddaf8, org.springframework.security.web.context.SecurityContextHolderFilter@6fb0261e, org.springframework.security.web.header.HeaderWriterFilter@5a7b6b75, org.springframework.security.web.authentication.logout.LogoutFilter@3bc20984, com.pridebank.token.security.JwtAuthenticationFilter@6b357eb6, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2f4d01b6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6fe04f2a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@55c50f52, org.springframework.security.web.session.SessionManagementFilter@6d31f106, org.springframework.security.web.access.ExceptionTranslationFilter@987a0bb, org.springframework.security.web.access.intercept.AuthorizationFilter@6df11e91]
+2025-11-19 10:05:41 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 7780 (http) with context path '/api'
+2025-11-19 10:05:41 [main] INFO  c.p.token.TokenGatewayApplication - Started TokenGatewayApplication in 3.648 seconds (process running for 4.029)
+2025-11-19 10:06:01 [http-nio-7780-exec-2] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-19 10:06:01 [http-nio-7780-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-19 10:06:01 [http-nio-7780-exec-2] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2025-11-19 10:06:01 [http-nio-7780-exec-2] INFO  c.p.token.controller.AuthController - Deposit/charge request received
+2025-11-19 10:06:01 [http-nio-7780-exec-2] DEBUG c.p.token.controller.AuthController - Successfully extracted credentials from token for user: admin
+2025-11-19 10:06:01 [http-nio-7780-exec-2] DEBUG c.p.token.controller.AuthController - Processing deposit for user: admin
+2025-11-19 10:06:01 [http-nio-7780-exec-2] INFO  c.p.t.s.ESBAuthenticationService - Validating Debit account number 217205102392301 for user: admin
+2025-11-19 10:06:01 [http-nio-7780-exec-2] DEBUG feign.template.Template - Explicit slash decoding specified, decoding all slashes in uri
+2025-11-19 10:06:01 [http-nio-7780-exec-2] DEBUG c.p.token.client.ESBFeignConfig - Feign Request: POST /Charge/card
+2025-11-19 10:06:01 [http-nio-7780-exec-2] DEBUG c.p.token.client.ESBFeignConfig - Headers: {Accept=[application/json], Authorization=[Basic YWRtaW46cXdlcnR5QDA5ODc2], Content-Length=[399], Content-Type=[application/json]}
+2025-11-19 10:06:01 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] ---> POST https://ESB-TEST2-PR.PRIDE.CO.UG:1984/restgateway/services/Charge/card HTTP/1.1
+2025-11-19 10:06:01 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Accept: application/json
+2025-11-19 10:06:01 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Authorization: Basic YWRtaW46cXdlcnR5QDA5ODc2
+2025-11-19 10:06:01 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Content-Length: 399
+2025-11-19 10:06:01 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Content-Type: application/json
+2025-11-19 10:06:01 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] 
+2025-11-19 10:06:01 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] {"debit_account":"217205102392301","currency":"UGX","narration":"TEST","transaction_id":"TRX1729094098675","branch":"B012435","userauthtoken":"eyJhbGciOiJIUzUxMiJ9.eyJjcmVkZW50aWFscyI6IllXUnRhVzQ2Y1hkbGNuUjVRREE1T0RjMiIsInVzZXJuYW1lIjoiYWRtaW4iLCJzdWIiOiJhZG1pbiIsImlhdCI6MTc2MzUzNDQ3MywiZXhwIjoxNzYzNTM4MDczfQ.sxTMJM_bCrzRDVI_-QoWlFtwMv78LEHnSaJ-FK46gmFJhY-OxU9IAoseZONzAqxNi66Pcid7QwYIgnUljbwVBA"}
+2025-11-19 10:06:01 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] ---> END HTTP (399-byte body)
+2025-11-19 10:06:02 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] <--- HTTP/1.1 200 OK (873ms)
+2025-11-19 10:06:02 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] cache-control: no-cache, no-store, must-revalidate
+2025-11-19 10:06:02 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] content-length: 101
+2025-11-19 10:06:02 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] content-security-policy: default-src 'self' pride.co.ug *.pride.co.ug
+2025-11-19 10:06:02 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] content-type: application/json
+2025-11-19 10:06:02 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] date: Wed, 19 Nov 2025 06:57:39 GMT
+2025-11-19 10:06:02 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] strict-transport-security: max-age=86400, includeSubDomains
+2025-11-19 10:06:02 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] x-content-type-options: nosniff
+2025-11-19 10:06:02 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] x-frame-options: SAMEORIGIN
+2025-11-19 10:06:02 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] 
+2025-11-19 10:06:02 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] {"description":"FAILED","code":"902","transaction_id":"","ft":"","reason":"transaction already used"}
+2025-11-19 10:06:02 [http-nio-7780-exec-2] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] <--- END HTTP (101-byte body)
+2025-11-19 10:06:02 [http-nio-7780-exec-2] INFO  c.p.t.s.ESBAuthenticationService - Account charging successful for account: 217205102392301
+2025-11-19 10:06:02 [http-nio-7780-exec-2] DEBUG c.p.t.s.ESBAuthenticationService - Account charging response: ChargeResponse(code=902, description=FAILED, transaction_id=, ft=, reason=transaction already used)
+2025-11-19 10:07:21 [http-nio-7780-exec-4] INFO  c.p.token.controller.AuthController - Login attempt for user: admin
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.p.t.s.ESBAuthenticationService - Authenticating with ESB for user: admin
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG feign.template.Template - Explicit slash decoding specified, decoding all slashes in uri
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.p.token.client.ESBFeignConfig - Feign Request: POST /Token/Authentication
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.p.token.client.ESBFeignConfig - Headers: {Accept=[application/json], Authorization=[Basic YWRtaW46cXdlcnR5QDA5ODc2], Content-Type=[application/json]}
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#authenticate] ---> POST https://ESB-TEST2-PR.PRIDE.CO.UG:1984/restgateway/services/Token/Authentication HTTP/1.1
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#authenticate] Accept: application/json
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#authenticate] Authorization: Basic YWRtaW46cXdlcnR5QDA5ODc2
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#authenticate] Content-Type: application/json
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#authenticate] ---> END HTTP (0-byte body)
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#authenticate] <--- HTTP/1.1 200 OK (119ms)
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#authenticate] cache-control: no-cache, no-store, must-revalidate
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#authenticate] content-length: 23
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#authenticate] content-security-policy: default-src 'self' pride.co.ug *.pride.co.ug
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#authenticate] content-type: application/json
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#authenticate] date: Wed, 19 Nov 2025 06:58:59 GMT
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#authenticate] strict-transport-security: max-age=86400, includeSubDomains
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#authenticate] x-content-type-options: nosniff
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#authenticate] x-frame-options: SAMEORIGIN
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#authenticate] 
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#authenticate] {"authenticated": true}
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#authenticate] <--- END HTTP (23-byte body)
+2025-11-19 10:07:21 [http-nio-7780-exec-4] INFO  c.p.t.s.ESBAuthenticationService - ESB authentication result for user admin: true
+2025-11-19 10:07:21 [http-nio-7780-exec-4] DEBUG c.p.t.s.ESBAuthenticationService - ESB response body: ESBAuthResponse(authenticated=true, message=null, userId=null, username=null)
+2025-11-19 10:07:21 [http-nio-7780-exec-4] INFO  c.p.token.controller.AuthController - Authentication successful for user: admin
+2025-11-19 10:07:50 [http-nio-7780-exec-5] INFO  c.p.token.controller.AuthController - Account verification request for account: 244206102280401
+2025-11-19 10:07:50 [http-nio-7780-exec-5] DEBUG c.p.token.controller.AuthController - Successfully extracted credentials from token for user: admin
+2025-11-19 10:07:50 [http-nio-7780-exec-5] DEBUG c.p.token.controller.AuthController - Extracted credentials from token for user: admin
+2025-11-19 10:07:50 [http-nio-7780-exec-5] INFO  c.p.t.s.ESBAuthenticationService - Validating account number 244206102280401 for user: admin
+2025-11-19 10:07:50 [http-nio-7780-exec-5] DEBUG feign.template.Template - Explicit slash decoding specified, decoding all slashes in uri
+2025-11-19 10:07:50 [http-nio-7780-exec-5] DEBUG feign.template.Template - Explicit slash decoding specified, decoding all slashes in uri
+2025-11-19 10:07:50 [http-nio-7780-exec-5] DEBUG c.p.token.client.ESBFeignConfig - Feign Request: GET /ATMAccountDetails/validation?accountnumber=244206102280401
+2025-11-19 10:07:50 [http-nio-7780-exec-5] DEBUG c.p.token.client.ESBFeignConfig - Headers: {Accept=[application/json], Authorization=[Basic YWRtaW46cXdlcnR5QDA5ODc2]}
+2025-11-19 10:07:50 [http-nio-7780-exec-5] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] ---> GET https://ESB-TEST2-PR.PRIDE.CO.UG:1984/restgateway/services/ATMAccountDetails/validation?accountnumber=244206102280401 HTTP/1.1
+2025-11-19 10:07:50 [http-nio-7780-exec-5] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] Accept: application/json
+2025-11-19 10:07:50 [http-nio-7780-exec-5] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] Authorization: Basic YWRtaW46cXdlcnR5QDA5ODc2
+2025-11-19 10:07:50 [http-nio-7780-exec-5] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] ---> END HTTP (0-byte body)
+2025-11-19 10:07:53 [http-nio-7780-exec-5] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] <--- HTTP/1.1 200 OK (2728ms)
+2025-11-19 10:07:53 [http-nio-7780-exec-5] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] cache-control: no-cache, no-store, must-revalidate
+2025-11-19 10:07:53 [http-nio-7780-exec-5] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] content-length: 383
+2025-11-19 10:07:53 [http-nio-7780-exec-5] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] content-security-policy: default-src 'self' pride.co.ug *.pride.co.ug
+2025-11-19 10:07:53 [http-nio-7780-exec-5] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] content-type: application/json
+2025-11-19 10:07:53 [http-nio-7780-exec-5] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] date: Wed, 19 Nov 2025 06:59:28 GMT
+2025-11-19 10:07:53 [http-nio-7780-exec-5] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] strict-transport-security: max-age=86400, includeSubDomains
+2025-11-19 10:07:53 [http-nio-7780-exec-5] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] x-content-type-options: nosniff
+2025-11-19 10:07:53 [http-nio-7780-exec-5] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] x-frame-options: SAMEORIGIN
+2025-11-19 10:07:53 [http-nio-7780-exec-5] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] 
+2025-11-19 10:07:53 [http-nio-7780-exec-5] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] {"status":"SUCCESS","customerId":"0001022804","tittle":"Mr","name":"NULUDIN","surname":"WAISWA","displayName":"NULUDIN WAISWA","address1":"KIGOGWA GOMBE","address2":"","email":"","mobile":"0743931631","branch":"1012","account1":"244206102280401","accountType1":"12","accountCurrency1":"UGX","account2":"","accountType2":"","accountCurrency2":"","cashLimit":"1000000","goodsLimit":""}
+2025-11-19 10:07:53 [http-nio-7780-exec-5] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] <--- END HTTP (383-byte body)
+2025-11-19 10:07:53 [http-nio-7780-exec-5] INFO  c.p.t.s.ESBAuthenticationService - Account validation successful for account: 244206102280401
+2025-11-19 10:07:53 [http-nio-7780-exec-5] DEBUG c.p.t.s.ESBAuthenticationService - Account validation response: AccountValidationResponse(status=SUCCESS, customerId=0001022804, tittle=Mr, name=NULUDIN, surname=WAISWA, displayName=NULUDIN WAISWA, address1=KIGOGWA GOMBE, address2=, email=, mobile=0743931631, branch=1012, account1=244206102280401, accountType1=12, accountCurrency1=UGX, account2=, accountType2=, accountCurrency2=, cashLimit=1000000, goodsLimit=, response=null)
+2025-11-19 10:07:53 [http-nio-7780-exec-5] INFO  c.p.token.controller.AuthController - Account verification successful for account: 244206102280401
+2025-11-19 10:08:17 [http-nio-7780-exec-6] INFO  c.p.token.controller.AuthController - Account verification request for account: 244206102280408
+2025-11-19 10:08:17 [http-nio-7780-exec-6] DEBUG c.p.token.controller.AuthController - Successfully extracted credentials from token for user: admin
+2025-11-19 10:08:17 [http-nio-7780-exec-6] DEBUG c.p.token.controller.AuthController - Extracted credentials from token for user: admin
+2025-11-19 10:08:17 [http-nio-7780-exec-6] INFO  c.p.t.s.ESBAuthenticationService - Validating account number 244206102280408 for user: admin
+2025-11-19 10:08:17 [http-nio-7780-exec-6] DEBUG feign.template.Template - Explicit slash decoding specified, decoding all slashes in uri
+2025-11-19 10:08:17 [http-nio-7780-exec-6] DEBUG feign.template.Template - Explicit slash decoding specified, decoding all slashes in uri
+2025-11-19 10:08:17 [http-nio-7780-exec-6] DEBUG c.p.token.client.ESBFeignConfig - Feign Request: GET /ATMAccountDetails/validation?accountnumber=244206102280408
+2025-11-19 10:08:17 [http-nio-7780-exec-6] DEBUG c.p.token.client.ESBFeignConfig - Headers: {Accept=[application/json], Authorization=[Basic YWRtaW46cXdlcnR5QDA5ODc2]}
+2025-11-19 10:08:17 [http-nio-7780-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] ---> GET https://ESB-TEST2-PR.PRIDE.CO.UG:1984/restgateway/services/ATMAccountDetails/validation?accountnumber=244206102280408 HTTP/1.1
+2025-11-19 10:08:17 [http-nio-7780-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] Accept: application/json
+2025-11-19 10:08:17 [http-nio-7780-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] Authorization: Basic YWRtaW46cXdlcnR5QDA5ODc2
+2025-11-19 10:08:17 [http-nio-7780-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] ---> END HTTP (0-byte body)
+2025-11-19 10:08:18 [http-nio-7780-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] <--- HTTP/1.1 200 OK (654ms)
+2025-11-19 10:08:18 [http-nio-7780-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] cache-control: no-cache, no-store, must-revalidate
+2025-11-19 10:08:18 [http-nio-7780-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] content-length: 291
+2025-11-19 10:08:18 [http-nio-7780-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] content-security-policy: default-src 'self' pride.co.ug *.pride.co.ug
+2025-11-19 10:08:18 [http-nio-7780-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] content-type: application/json
+2025-11-19 10:08:18 [http-nio-7780-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] date: Wed, 19 Nov 2025 06:59:55 GMT
+2025-11-19 10:08:18 [http-nio-7780-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] strict-transport-security: max-age=86400, includeSubDomains
+2025-11-19 10:08:18 [http-nio-7780-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] x-content-type-options: nosniff
+2025-11-19 10:08:18 [http-nio-7780-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] x-frame-options: SAMEORIGIN
+2025-11-19 10:08:18 [http-nio-7780-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] 
+2025-11-19 10:08:18 [http-nio-7780-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] {"status":"INVALID","customerId":"","tittle":"","name":"","surname":"","displayName":"","address1":"","address2":"","email": "","mobile":"","branch":"","account1":"","accountType1":"","accountCurrency1":"","account2":"","accountType2":"","accountCurrency2":"","cashLimit":"","goodsLimit":""}
+2025-11-19 10:08:18 [http-nio-7780-exec-6] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#validateAccount] <--- END HTTP (291-byte body)
+2025-11-19 10:08:18 [http-nio-7780-exec-6] INFO  c.p.t.s.ESBAuthenticationService - Account validation successful for account: 244206102280408
+2025-11-19 10:08:18 [http-nio-7780-exec-6] DEBUG c.p.t.s.ESBAuthenticationService - Account validation response: AccountValidationResponse(status=INVALID, customerId=, tittle=, name=, surname=, displayName=, address1=, address2=, email=, mobile=, branch=, account1=, accountType1=, accountCurrency1=, account2=, accountType2=, accountCurrency2=, cashLimit=, goodsLimit=, response=null)
+2025-11-19 10:08:18 [http-nio-7780-exec-6] INFO  c.p.token.controller.AuthController - Account verification successful for account: 244206102280408
+2025-11-19 10:09:18 [http-nio-7780-exec-8] INFO  c.p.token.controller.AuthController - Deposit/charge request received
+2025-11-19 10:09:18 [http-nio-7780-exec-8] DEBUG c.p.token.controller.AuthController - Successfully extracted credentials from token for user: admin
+2025-11-19 10:09:18 [http-nio-7780-exec-8] DEBUG c.p.token.controller.AuthController - Processing deposit for user: admin
+2025-11-19 10:09:18 [http-nio-7780-exec-8] INFO  c.p.t.s.ESBAuthenticationService - Validating Debit account number 217205102392301 for user: admin
+2025-11-19 10:09:18 [http-nio-7780-exec-8] DEBUG feign.template.Template - Explicit slash decoding specified, decoding all slashes in uri
+2025-11-19 10:09:18 [http-nio-7780-exec-8] DEBUG c.p.token.client.ESBFeignConfig - Feign Request: POST /Charge/card
+2025-11-19 10:09:18 [http-nio-7780-exec-8] DEBUG c.p.token.client.ESBFeignConfig - Headers: {Accept=[application/json], Authorization=[Basic YWRtaW46cXdlcnR5QDA5ODc2], Content-Length=[399], Content-Type=[application/json]}
+2025-11-19 10:09:18 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] ---> POST https://ESB-TEST2-PR.PRIDE.CO.UG:1984/restgateway/services/Charge/card HTTP/1.1
+2025-11-19 10:09:18 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Accept: application/json
+2025-11-19 10:09:18 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Authorization: Basic YWRtaW46cXdlcnR5QDA5ODc2
+2025-11-19 10:09:18 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Content-Length: 399
+2025-11-19 10:09:18 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Content-Type: application/json
+2025-11-19 10:09:18 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] 
+2025-11-19 10:09:18 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] {"debit_account":"217205102392301","currency":"UGX","narration":"TEST","transaction_id":"TRX1729094098675","branch":"B012435","userauthtoken":"eyJhbGciOiJIUzUxMiJ9.eyJjcmVkZW50aWFscyI6IllXUnRhVzQ2Y1hkbGNuUjVRREE1T0RjMiIsInVzZXJuYW1lIjoiYWRtaW4iLCJzdWIiOiJhZG1pbiIsImlhdCI6MTc2MzUzNDQ3MywiZXhwIjoxNzYzNTM4MDczfQ.sxTMJM_bCrzRDVI_-QoWlFtwMv78LEHnSaJ-FK46gmFJhY-OxU9IAoseZONzAqxNi66Pcid7QwYIgnUljbwVBA"}
+2025-11-19 10:09:18 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] ---> END HTTP (399-byte body)
+2025-11-19 10:09:19 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] <--- HTTP/1.1 200 OK (756ms)
+2025-11-19 10:09:19 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] cache-control: no-cache, no-store, must-revalidate
+2025-11-19 10:09:19 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] content-length: 101
+2025-11-19 10:09:19 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] content-security-policy: default-src 'self' pride.co.ug *.pride.co.ug
+2025-11-19 10:09:19 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] content-type: application/json
+2025-11-19 10:09:19 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] date: Wed, 19 Nov 2025 07:00:56 GMT
+2025-11-19 10:09:19 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] strict-transport-security: max-age=86400, includeSubDomains
+2025-11-19 10:09:19 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] x-content-type-options: nosniff
+2025-11-19 10:09:19 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] x-frame-options: SAMEORIGIN
+2025-11-19 10:09:19 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] 
+2025-11-19 10:09:19 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] {"description":"FAILED","code":"902","transaction_id":"","ft":"","reason":"transaction already used"}
+2025-11-19 10:09:19 [http-nio-7780-exec-8] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] <--- END HTTP (101-byte body)
+2025-11-19 10:09:19 [http-nio-7780-exec-8] INFO  c.p.t.s.ESBAuthenticationService - Account charging successful for account: 217205102392301
+2025-11-19 10:09:19 [http-nio-7780-exec-8] DEBUG c.p.t.s.ESBAuthenticationService - Account charging response: ChargeResponse(code=902, description=FAILED, transaction_id=, ft=, reason=transaction already used)
+2025-11-19 10:13:18 [main] INFO  c.p.token.TokenGatewayApplication - Starting TokenGatewayApplication using Java 20.0.2.1 with PID 18864 (C:\Users\sodong\Projects\token-gateway\target\classes started by sodong in C:\Users\sodong\Projects\token-gateway)
+2025-11-19 10:13:18 [main] DEBUG c.p.token.TokenGatewayApplication - Running with Spring Boot v3.1.5, Spring v6.0.13
+2025-11-19 10:13:18 [main] INFO  c.p.token.TokenGatewayApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-19 10:13:19 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=0c3359fc-815a-39e8-9852-7d6fbb285282
+2025-11-19 10:13:19 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'com.pridebank.token.client.ESBClient' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-11-19 10:13:19 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 7780 (http)
+2025-11-19 10:13:19 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-19 10:13:19 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.15]
+2025-11-19 10:13:19 [main] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2025-11-19 10:13:19 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1573 ms
+2025-11-19 10:13:20 [main] DEBUG c.p.t.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-11-19 10:13:20 [main] WARN  c.p.token.client.ESBFeignConfig - ⚠️  SSL verification disabled - DO NOT USE IN PRODUCTION
+2025-11-19 10:13:20 [main] WARN  c.p.token.client.ESBFeignConfig - ⚠️  SSL verification disabled - DO NOT USE IN PRODUCTION
+2025-11-19 10:13:20 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: c80887c5-aab9-4ae5-808e-cd25c3f36263
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-19 10:13:20 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-11-19 10:13:20 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@aca3c85, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@45eab322, org.springframework.security.web.context.SecurityContextHolderFilter@987a0bb, org.springframework.security.web.header.HeaderWriterFilter@3962ec84, org.springframework.security.web.authentication.logout.LogoutFilter@5be4be74, com.pridebank.token.security.JwtAuthenticationFilter@23ad71bf, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5a7b6b75, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@39f42d0e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@f017dd0, org.springframework.security.web.session.SessionManagementFilter@3cf55e0c, org.springframework.security.web.access.ExceptionTranslationFilter@4cae66a8, org.springframework.security.web.access.intercept.AuthorizationFilter@5323999f]
+2025-11-19 10:13:21 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 7780 (http) with context path '/api'
+2025-11-19 10:13:21 [main] INFO  c.p.token.TokenGatewayApplication - Started TokenGatewayApplication in 3.552 seconds (process running for 3.908)
+2025-11-19 10:13:31 [main] INFO  c.p.token.TokenGatewayApplication - Starting TokenGatewayApplication using Java 20.0.2.1 with PID 15836 (C:\Users\sodong\Projects\token-gateway\target\classes started by sodong in C:\Users\sodong\Projects\token-gateway)
+2025-11-19 10:13:31 [main] DEBUG c.p.token.TokenGatewayApplication - Running with Spring Boot v3.1.5, Spring v6.0.13
+2025-11-19 10:13:31 [main] INFO  c.p.token.TokenGatewayApplication - No active profile set, falling back to 1 default profile: "default"
+2025-11-19 10:13:32 [main] INFO  o.s.cloud.context.scope.GenericScope - BeanFactory id=0c3359fc-815a-39e8-9852-7d6fbb285282
+2025-11-19 10:13:32 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'com.pridebank.token.client.ESBClient' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2025-11-19 10:13:32 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 7780 (http)
+2025-11-19 10:13:32 [main] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-11-19 10:13:32 [main] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.15]
+2025-11-19 10:13:32 [main] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring embedded WebApplicationContext
+2025-11-19 10:13:32 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1447 ms
+2025-11-19 10:13:32 [main] DEBUG c.p.t.s.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2025-11-19 10:13:33 [main] WARN  c.p.token.client.ESBFeignConfig - ⚠️  SSL verification disabled - DO NOT USE IN PRODUCTION
+2025-11-19 10:13:33 [main] WARN  c.p.token.client.ESBFeignConfig - ⚠️  SSL verification disabled - DO NOT USE IN PRODUCTION
+2025-11-19 10:13:33 [main] WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: eef611aa-ea10-46d8-aa78-8b1d7ce00d8f
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-11-19 10:13:33 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 3 endpoint(s) beneath base path '/actuator'
+2025-11-19 10:13:33 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6735f210, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4567fb2b, org.springframework.security.web.context.SecurityContextHolderFilter@2cae5fa7, org.springframework.security.web.header.HeaderWriterFilter@1815577b, org.springframework.security.web.authentication.logout.LogoutFilter@5f3b84bd, com.pridebank.token.security.JwtAuthenticationFilter@4391a2d8, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6d7b001b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@587f4f63, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@372954e1, org.springframework.security.web.session.SessionManagementFilter@39f42d0e, org.springframework.security.web.access.ExceptionTranslationFilter@639c7f9c, org.springframework.security.web.access.intercept.AuthorizationFilter@6bd92538]
+2025-11-19 10:13:34 [main] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 7780 (http) with context path '/api'
+2025-11-19 10:13:34 [main] INFO  c.p.token.TokenGatewayApplication - Started TokenGatewayApplication in 3.441 seconds (process running for 3.796)
+2025-11-19 10:13:42 [http-nio-7780-exec-3] INFO  o.a.c.c.C.[.[localhost].[/api] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-11-19 10:13:42 [http-nio-7780-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-11-19 10:13:42 [http-nio-7780-exec-3] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2025-11-19 10:13:42 [http-nio-7780-exec-3] INFO  c.p.token.controller.AuthController - Deposit/charge request received
+2025-11-19 10:13:42 [http-nio-7780-exec-3] DEBUG c.p.token.controller.AuthController - Successfully extracted credentials from token for user: admin
+2025-11-19 10:13:42 [http-nio-7780-exec-3] DEBUG c.p.token.controller.AuthController - Processing deposit for user: admin
+2025-11-19 10:13:42 [http-nio-7780-exec-3] INFO  c.p.t.s.ESBAuthenticationService - Validating Debit account number 217205102392301 for user: admin
+2025-11-19 10:13:42 [http-nio-7780-exec-3] DEBUG feign.template.Template - Explicit slash decoding specified, decoding all slashes in uri
+2025-11-19 10:13:42 [http-nio-7780-exec-3] DEBUG c.p.token.client.ESBFeignConfig - Feign Request: POST /Charge/card
+2025-11-19 10:13:42 [http-nio-7780-exec-3] DEBUG c.p.token.client.ESBFeignConfig - Headers: {Accept=[application/json], Authorization=[Basic YWRtaW46cXdlcnR5QDA5ODc2], Content-Length=[398], Content-Type=[application/json]}
+2025-11-19 10:13:42 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] ---> POST https://ESB-TEST2-PR.PRIDE.CO.UG:1984/restgateway/services/Charge/card HTTP/1.1
+2025-11-19 10:13:42 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Accept: application/json
+2025-11-19 10:13:42 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Authorization: Basic YWRtaW46cXdlcnR5QDA5ODc2
+2025-11-19 10:13:42 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Content-Length: 398
+2025-11-19 10:13:42 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] Content-Type: application/json
+2025-11-19 10:13:42 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] 
+2025-11-19 10:13:42 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] {"debit_account":"217205102392301","currency":"UGX","narration":"TEST","transaction_id":"TRX172909344275","branch":"B012435","userauthtoken":"eyJhbGciOiJIUzUxMiJ9.eyJjcmVkZW50aWFscyI6IllXUnRhVzQ2Y1hkbGNuUjVRREE1T0RjMiIsInVzZXJuYW1lIjoiYWRtaW4iLCJzdWIiOiJhZG1pbiIsImlhdCI6MTc2MzUzNDQ3MywiZXhwIjoxNzYzNTM4MDczfQ.sxTMJM_bCrzRDVI_-QoWlFtwMv78LEHnSaJ-FK46gmFJhY-OxU9IAoseZONzAqxNi66Pcid7QwYIgnUljbwVBA"}
+2025-11-19 10:13:42 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] ---> END HTTP (398-byte body)
+2025-11-19 10:13:50 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] <--- HTTP/1.1 200 OK (8001ms)
+2025-11-19 10:13:50 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] cache-control: no-cache, no-store, must-revalidate
+2025-11-19 10:13:50 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] content-length: 101
+2025-11-19 10:13:50 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] content-security-policy: default-src 'self' pride.co.ug *.pride.co.ug
+2025-11-19 10:13:50 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] content-type: application/json
+2025-11-19 10:13:50 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] date: Wed, 19 Nov 2025 07:05:20 GMT
+2025-11-19 10:13:50 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] strict-transport-security: max-age=86400, includeSubDomains
+2025-11-19 10:13:50 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] x-content-type-options: nosniff
+2025-11-19 10:13:50 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] x-frame-options: SAMEORIGIN
+2025-11-19 10:13:50 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] 
+2025-11-19 10:13:50 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] {"code":"00","description":"SUCCESS","transaction_id":"TRX172909344275","ft":"991863519","reason":""}
+2025-11-19 10:13:50 [http-nio-7780-exec-3] DEBUG c.pridebank.token.client.ESBClient - [ESBClient#CardChargePostRequest] <--- END HTTP (101-byte body)
+2025-11-19 10:13:50 [http-nio-7780-exec-3] INFO  c.p.t.s.ESBAuthenticationService - Account charging successful for account: 217205102392301
+2025-11-19 10:13:50 [http-nio-7780-exec-3] DEBUG c.p.t.s.ESBAuthenticationService - Account charging response: ChargeResponse(code=00, description=SUCCESS, transaction_id=TRX172909344275, ft=991863519, reason=)

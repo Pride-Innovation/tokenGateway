@@ -55,13 +55,18 @@ public class AuthController {
                     authRequest.getPassword()
             );
 
+            // Get issued and expiry dates in ISO 8601 format
+            String issuedDate = tokenProvider.getIssuedDateFromToken(token);
+            String expiryDate = tokenProvider.getExpiryDateFromToken(token);
+
             log.info("Authentication successful for user: {}", authRequest.getUsername());
 
             return ResponseEntity.ok(AuthResponse.builder()
-                    .authToken(token)
-                    .tokenType("Bearer")
-                    .expiresIn(tokenProvider.getExpirationMs())
-                    .message("Authentication successful")
+                    .access_token(token)
+                    .issued(issuedDate)
+                    .expires(expiryDate)
+//                    .message("Authentication successful")
+                    .client_id("ISW_CLIENT_ID")
                     .build());
 
         } catch (AuthenticationFailedException ex) {
@@ -79,16 +84,10 @@ public class AuthController {
         }
     }
 
-
     /**
      * OAuth-style Login endpoint - Authenticates with ESB using form-urlencoded
      * POST /api/auth/login/xml
      * Content-Type: application/x-www-form-urlencoded
-     * <p>
-     * Accepts:
-     * - grant_type: The type of grant being requested
-     * - client_id: The client ID (used as username)
-     * - client_secret: The client secret (used as password)
      */
     @PostMapping(
             value = "/login/xml",
@@ -101,9 +100,6 @@ public class AuthController {
             @RequestParam("client_secret") String clientSecret
     ) {
         log.info("OAuth-style login attempt for client_id: {} with grant_type: {}", clientId, grantType);
-
-        System.out.println("user name::" + clientId);
-        System.out.println("password::" + clientSecret);
 
         try {
             // Validate grant_type
@@ -133,8 +129,6 @@ public class AuthController {
                                 .build());
             }
 
-            // Use client_id as username and client_secret as password
-
             log.debug("Attempting ESB authentication for client: {}", clientId);
 
             // Authenticate with ESB platform
@@ -151,13 +145,17 @@ public class AuthController {
             // Generate JWT token with embedded credentials
             String token = tokenProvider.generateToken(clientId, clientSecret);
 
+            // Get issued and expiry dates in ISO 8601 format
+            String issuedDate = tokenProvider.getIssuedDateFromToken(token);
+            String expiryDate = tokenProvider.getExpiryDateFromToken(token);
+
             log.info("OAuth-style authentication successful for client_id: {}", clientId);
 
             return ResponseEntity.ok(AuthResponse.builder()
-                    .authToken(token)
-                    .tokenType("Bearer")
-                    .expiresIn(tokenProvider.getExpirationMs())
-                    .message("Authentication successful")
+                    .access_token(token)
+                    .issued(issuedDate)
+                    .expires(expiryDate)
+                    .client_id("ISW_CLIENT_ID")
                     .build());
 
         } catch (AuthenticationFailedException ex) {
@@ -263,7 +261,7 @@ public class AuthController {
 
             return new ResponseEntity<>(
                     response,
-                    HttpStatusCode.valueOf(Objects.equals(esbResponse.getBody().getCode(), "200") ? 200 : 400)
+                    HttpStatusCode.valueOf(Objects.equals(esbResponse.getBody().getCode(), "00") ? 201 : 400)
             );
 
         } catch (Exception ex) {

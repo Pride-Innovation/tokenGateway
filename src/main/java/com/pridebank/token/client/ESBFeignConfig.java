@@ -15,10 +15,10 @@ import java.security.cert.X509Certificate;
 @Configuration
 public class ESBFeignConfig {
 
-    @Value("${esb.connection-timeout:5000}")
+    @Value("${esb.connection-timeout:60000}")
     private int connectTimeout;
 
-    @Value("${esb.read-timeout:10000}")
+    @Value("${esb.read-timeout:60000}")
     private int readTimeout;
 
     /**

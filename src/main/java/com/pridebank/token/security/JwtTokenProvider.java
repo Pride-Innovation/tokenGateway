@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
@@ -22,6 +26,13 @@ public class JwtTokenProvider {
 
     @Value("${jwt.expiration}")
     private long jwtExpirationMs;
+
+    // Uganda/East Africa Time Zone (EAT - UTC+3)
+    private static final ZoneId UGANDA_TIMEZONE = ZoneId.of("Africa/Kampala");
+
+    // ISO 8601 formatter with 7 decimal places for fractional seconds and +03:00 offset
+    private static final DateTimeFormatter ISO_FORMATTER =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSS'+03:00'");
 
     private SecretKey getSigningKey() {
         byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
@@ -51,6 +62,54 @@ public class JwtTokenProvider {
                 .setExpiration(expiryDate)
                 .signWith(getSigningKey(), SignatureAlgorithm.HS512)
                 .compact();
+    }
+
+    /**
+     * Convert Date to Uganda Time (EAT - UTC+3) in ISO 8601.
+     * Format: 2025-11-19T13:42:41.0000000+03:00
+     */
+    public String formatDateToISO8601(Date date) {
+        Instant instant = date.toInstant();
+        ZonedDateTime ugandaTime = instant.atZone(UGANDA_TIMEZONE);
+        return ugandaTime.format(ISO_FORMATTER);
+    }
+
+    /**
+     * Get issued date from token as ISO 8601 string in Uganda Time
+     */
+    public String getIssuedDateFromToken(String token) {
+        try {
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(getSigningKey())
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+
+            Date issuedAt = claims.getIssuedAt();
+            return formatDateToISO8601(issuedAt);
+        } catch (Exception e) {
+            log.error("Failed to extract issued date from token", e);
+            return null;
+        }
+    }
+
+    /**
+     * Get expiry date from token as ISO 8601 string in Uganda Time
+     */
+    public String getExpiryDateFromToken(String token) {
+        try {
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(getSigningKey())
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+
+            Date expiration = claims.getExpiration();
+            return formatDateToISO8601(expiration);
+        } catch (Exception e) {
+            log.error("Failed to extract expiry date from token", e);
+            return null;
+        }
     }
 
     /**
@@ -104,19 +163,6 @@ public class JwtTokenProvider {
     }
 
     /**
-     * Get embedded credentials from JWT token (Base64 encoded)
-     */
-    public String getCredentialsFromToken(String token) {
-        Claims claims = Jwts.parserBuilder()
-                .setSigningKey(getSigningKey())
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-
-        return claims.get("credentials", String.class);
-    }
-
-    /**
      * Validate JWT token
      */
     public boolean validateToken(String authToken) {
@@ -157,10 +203,4 @@ public class JwtTokenProvider {
         }
     }
 
-    /**
-     * Get expiration time in milliseconds
-     */
-    public long getExpirationMs() {
-        return jwtExpirationMs;
-    }
 }
