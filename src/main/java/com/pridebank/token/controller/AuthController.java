@@ -19,7 +19,7 @@ import java.util.Objects;
 
 @Slf4j
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/v1")
 @RequiredArgsConstructor
 public class AuthController {
 
@@ -90,7 +90,7 @@ public class AuthController {
      * Content-Type: application/x-www-form-urlencoded
      */
     @PostMapping(
-            value = "/login/xml",
+            value = "/getauthtoken",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -178,7 +178,7 @@ public class AuthController {
      * Verify account number endpoint
      * POST /api/auth/verify-account
      */
-    @PostMapping("/verify-account")
+    @PostMapping("/customer")
     public ResponseEntity<?> verifyAccountNumber(@Valid @RequestBody VerifyAccountRequest request) {
         log.info("Account verification request for account: {}", request.getAccountNumber());
 
@@ -232,7 +232,7 @@ public class AuthController {
      * Deposit/Charge endpoint
      * POST /api/auth/charge
      */
-    @PostMapping("/charge")
+    @PostMapping("/postCharge")
     public ResponseEntity<?> charge(@Valid @RequestBody ChargeRequest request) {
         log.info("Deposit/charge request received");
 

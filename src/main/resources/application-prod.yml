@@ -13,8 +13,8 @@ jwt:
 
 # ESB Configuration (production)
 esb:
-  base-url: ${ESB_BASE_URL}
-  auth-endpoint: ${ESB_AUTH_ENDPOINT:/Token/Authentication}
+  base-url: ${BASE_URL}
+  auth-endpoint: ${AUTH_URL:/Token/Authentication}
   connection-timeout: ${ESB_CONNECT_TIMEOUT:10000}
   read-timeout: ${ESB_READ_TIMEOUT:30000}
 
