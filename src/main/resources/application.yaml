@@ -6,8 +6,6 @@ server:
 spring:
   application:
     name: token-gateway
-
-  # Jackson configuration
   jackson:
     default-property-inclusion: non_null
     serialization:
@@ -16,37 +14,46 @@ spring:
     deserialization:
       fail-on-unknown-properties: false
 
-# JWT Configuration
 jwt:
-  secret: ${JWT_SECRET_KEY}
-  expiration: 3600000 # 1 hour in milliseconds
-  timezone: Africa/Kampala  # Uganda timezone (EAT - UTC+3)
+  secret: ${JWT_SECRET_KEY:dev-secret}
+  expiration: 3600000
+  timezone: Africa/Kampala
 
-# ESB Configuration
+atm:
+  server:
+    port: ${ATM_SERVER_PORT:7790}
+    threads: 20
+    socket:
+      timeout: 300000
+
 esb:
-  base-url: ${BASE_URL}
-  auth-endpoint: ${AUTH_URL}
-  account-validation: ${ACCOUNT_VALIDATION}
-  account-charge: ${ACCOUNT_CHARGE}
-  connection-timeout: 60000  # 60 seconds (1 minute)
-  read-timeout: 60000        # 60 seconds (1 minute)
+  base-url: ${BASE_URL:https://sandbox.esb.local}
+  auth-endpoint: ${AUTH_URL:/auth}
+  account-validation: ${ACCOUNT_VALIDATION:/accounts/validate}
+  account-charge: ${ACCOUNT_CHARGE:/accounts/charge}
+  connection-timeout: 60000
+  read-timeout: 60000
   ssl:
-    verify: ${ESB_SSL_VERIFY:false}  # false for dev, true for prod
+    verify: ${ESB_SSL_VERIFY:false}
+  atm:
+    username: ${ESB_ATM_USERNAME:devUser}
+    password: ${ESB_ATM_PASSWORD:devPass}
+    base-url: ${BASE_URL:https://sandbox.esb.local}
+    client-id: ${ESB_CLIENT_ID:dev-client}
+    client-secret: ${CLIENT_SECRET:dev-secret}
 
-# Feign Configuration
 feign:
   client:
     config:
       default:
-        connectTimeout: 60000      # 60 seconds (1 minute)
-        readTimeout: 60000         # 60 seconds (1 minute)
+        connectTimeout: 60000
+        readTimeout: 60000
         loggerLevel: full
       esb-client:
-        connectTimeout: 60000      # 60 seconds (1 minute)
-        readTimeout: 60000         # 60 seconds (1 minute)
+        connectTimeout: 60000
+        readTimeout: 60000
         loggerLevel: full
 
-# Actuator Configuration
 management:
   endpoints:
     web:
@@ -55,28 +62,16 @@ management:
   endpoint:
     health:
       show-details: when-authorized
-  health:
-    defaults:
-      enabled: true
 
-# Logging Configuration
 logging:
   level:
     root: INFO
     com.pridebank.token: DEBUG
-    com.pridebank.token.client.ESBClient: DEBUG
     feign: DEBUG
-    feign.Logger: DEBUG
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
-    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
-  file:
-    name: logs/token-gateway.log
-    max-size: 10MB
-    max-history: 30
 
 ---
-# Development Profile
 spring:
   config:
     activate:
@@ -88,35 +83,14 @@ logging:
     com.pridebank.token: DEBUG
     feign: DEBUG
 
-esb:
-  ssl:
-    verify: false  # Disable SSL verification in dev
-
 feign:
   client:
     config:
       esb-client:
-        loggerLevel: full  # Full logging in dev
+        loggerLevel: full
 
 ---
-# Production Profile
 spring:
   config:
     activate:
       on-profile: prod
-
-logging:
-  level:
-    root: INFO
-    com.pridebank.token: INFO
-    feign: INFO
-
-esb:
-  ssl:
-    verify: true  # Enable SSL verification in prod
-
-feign:
-  client:
-    config:
-      esb-client:
-        loggerLevel: basic  # Minimal logging in prod
