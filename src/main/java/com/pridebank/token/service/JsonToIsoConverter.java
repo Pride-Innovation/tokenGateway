@@ -18,6 +18,9 @@ public class JsonToIsoConverter {
     @Autowired
     private IsoMessageBuilder isoMessageBuilder;
 
+    @Autowired
+    private ResponseCodeMapper responseCodeMapper;
+
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     public IsoMessage convert(String jsonResponse, IsoMessage originalRequest) throws Exception {
@@ -30,7 +33,7 @@ public class JsonToIsoConverter {
             response.setValue(38, authCode, IsoType.ALPHA, 6);
         }
 
-        String isoCode = ResponseCodeMapper.mapEsbToIso(
+        String isoCode = responseCodeMapper.mapEsbToIso(
                 json.hasNonNull("responseCode") ? json.get("responseCode").asText() : "SYSTEM_ERROR"
         );
         response.setValue(39, isoCode, IsoType.ALPHA, 2);

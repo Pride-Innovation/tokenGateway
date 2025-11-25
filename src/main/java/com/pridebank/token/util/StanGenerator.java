@@ -1,8 +1,10 @@
 package com.pridebank.token.util;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.Clock;
 import java.time.LocalDate;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -13,7 +15,16 @@ public class StanGenerator {
 
     private final AtomicInteger globalCounter = new AtomicInteger(1);
     private final ConcurrentHashMap<String, AtomicInteger> terminalCounters = new ConcurrentHashMap<>();
-    private volatile LocalDate lastResetDate = LocalDate.now();
+
+    @Autowired
+    private Clock clock;
+
+    private volatile LocalDate lastResetDate;
+
+    public StanGenerator() {
+        // lastResetDate will be set on first use via clock to avoid NPE before injection
+        this.lastResetDate = LocalDate.now();
+    }
 
     private static final int MAX_STAN = 999999;
     private static final int MIN_STAN = 1;
@@ -41,7 +52,10 @@ public class StanGenerator {
     }
 
     private void checkDailyReset() {
-        LocalDate today = LocalDate.now();
+        LocalDate today = (clock != null) ? LocalDate.now(clock) : LocalDate.now();
+        if (lastResetDate == null) {
+            lastResetDate = today;
+        }
         if (!today.equals(lastResetDate)) {
             resetAllCounters();
             lastResetDate = today;

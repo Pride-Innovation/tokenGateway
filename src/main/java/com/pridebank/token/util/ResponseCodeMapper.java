@@ -1,23 +1,21 @@
 package com.pridebank.token.util;
 
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Setter
+@Component
+@ConfigurationProperties(prefix = "esb")
 public class ResponseCodeMapper {
 
-    private static final Map<String, String> ESB_TO_ISO_MAP = new HashMap<>();
+    private Map<String, String> codes = new HashMap<>();
 
-    static {
-        ESB_TO_ISO_MAP.put("SUCCESS", "00");
-        ESB_TO_ISO_MAP.put("INSUFFICIENT_FUNDS", "51");
-        ESB_TO_ISO_MAP.put("INVALID_ACCOUNT", "14");
-        ESB_TO_ISO_MAP.put("INVALID_PIN", "55");
-        ESB_TO_ISO_MAP.put("LIMIT_EXCEEDED", "61");
-        ESB_TO_ISO_MAP.put("TIMEOUT", "68");
-        ESB_TO_ISO_MAP.put("SYSTEM_ERROR", "96");
-    }
-
-    public static String mapEsbToIso(String esbCode) {
-        return ESB_TO_ISO_MAP.getOrDefault(esbCode, "96");
+    public String mapEsbToIso(String esbCode) {
+        if (esbCode == null || esbCode.isBlank()) return codes.getOrDefault("SYSTEM_ERROR", "96");
+        return codes.getOrDefault(esbCode, codes.getOrDefault("SYSTEM_ERROR", "96"));
     }
 }

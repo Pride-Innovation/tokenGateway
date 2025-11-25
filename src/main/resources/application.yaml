@@ -41,6 +41,14 @@ esb:
     base-url: ${BASE_URL:https://sandbox.esb.local}
     client-id: ${ESB_CLIENT_ID:dev-client}
     client-secret: ${CLIENT_SECRET:dev-secret}
+  codes:
+    SUCCESS: "00"
+    INSUFFICIENT_FUNDS: "51"
+    INVALID_ACCOUNT: "14"
+    INVALID_PIN: "55"
+    LIMIT_EXCEEDED: "61"
+    TIMEOUT: "68"
+    SYSTEM_ERROR: "96"
 
 feign:
   client:

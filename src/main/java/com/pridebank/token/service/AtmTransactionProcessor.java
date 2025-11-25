@@ -3,6 +3,7 @@ package com.pridebank.token.service;
 import com.solab.iso8583.IsoMessage;
 import com.solab.iso8583.IsoType;
 import com.solab.iso8583.MessageFactory;
+import com.pridebank.token.validation.IsoValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,10 +27,23 @@ public class AtmTransactionProcessor {
     @Autowired
     private IsoMessageBuilder isoMessageBuilder;
 
+    @Autowired
+    private IsoValidator isoValidator;
+
     public IsoMessage processTransaction(IsoMessage isoRequest) {
-        String stan = isoRequest.hasField(11) ? isoRequest.getObjectValue(11).toString() : "unknown";
+        String stan = (isoRequest != null && isoRequest.hasField(11)) ?
+                isoRequest.getObjectValue(11).toString() : "unknown";
+
+        // Validate request first
+        IsoValidator.ValidationResult vr = isoValidator.validate0200(isoRequest);
+        if (!vr.isValid()) {
+            log.warn("Validation failed - STAN: {} - {}", stan, vr.summary());
+            // 30 = Format error
+            return createErrorResponse(isoRequest, "30", truncate(vr.summary()));
+        }
 
         try {
+            assert isoRequest != null;
             String jsonRequest = isoToJsonConverter.convert(isoRequest);
             String jsonResponse = esbGatewayService.sendToEsb(jsonRequest, isoRequest);
             return jsonToIsoConverter.convert(jsonResponse, isoRequest);
@@ -53,13 +67,11 @@ public class AtmTransactionProcessor {
                 response = messageFactory.newMessage(responseMti);
             }
 
-            // Field 39: Response code (2 chars)
             String code = (responseCode == null || responseCode.isBlank()) ? "96" : responseCode;
             response.setValue(39, code, IsoType.ALPHA, 2);
 
-            // Optional: Field 44 message (LLVAR, up to 25 chars here)
             if (message != null && !message.isBlank()) {
-                String msg = message.length() > 25 ? message.substring(0, 25) : message;
+                String msg = truncate(message);
                 response.setValue(44, msg, IsoType.LLVAR, msg.length());
             }
 
@@ -68,5 +80,9 @@ public class AtmTransactionProcessor {
         } catch (Exception e) {
             throw new RuntimeException("Unable to create error response", e);
         }
+    }
+
+    private String truncate(String s) {
+        return s.length() > 25 ? s.substring(0, 25) : s;
     }
 }

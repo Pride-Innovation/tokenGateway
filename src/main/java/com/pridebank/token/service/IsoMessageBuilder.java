@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -22,6 +23,9 @@ public class IsoMessageBuilder {
     @Autowired
     private StanGenerator stanGenerator;
 
+    @Autowired
+    private Clock clock; // injected for deterministic time in tests
+
     private static final DateTimeFormatter TRANSMISSION_DATE_FORMAT =
             DateTimeFormatter.ofPattern("MMddHHmmss");
     private static final DateTimeFormatter LOCAL_TIME_FORMAT =
@@ -31,7 +35,7 @@ public class IsoMessageBuilder {
 
     public IsoMessage build0200(String pan, long amount, String terminalId, String processingCode) {
         IsoMessage msg = messageFactory.newMessage(0x200);
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
 
         msg.setValue(2, pan, IsoType.LLVAR, pan.length());
         msg.setValue(3, processingCode, IsoType.NUMERIC, 6);
