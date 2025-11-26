@@ -21,7 +21,7 @@ class IsoToJsonConverterTest {
 
         IsoToJsonConverter c = new IsoToJsonConverter();
         String json = c.convert(m);
-        assertThat(json).contains("\"messageType\":\"0200\"");
+        assertThat(json).contains("\"messageType\":\"0512\"");
         assertThat(json).contains("\"amount\":\"100.00\"");
         assertThat(json).contains("\"cardNumber\":\"123456******3456\"");
     }

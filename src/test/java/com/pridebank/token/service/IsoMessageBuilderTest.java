@@ -31,10 +31,10 @@ class IsoMessageBuilderTest {
     void build0200_populatesMandatoryFields() {
         IsoMessage m = builder.build0200("1234567890123456", 1500L, "TERM01", "000000");
 
-        assertThat(String.format("%04d", m.getType())).isEqualTo("0200");
-        assertThat((String) m.getObjectValue(4)).isEqualTo("000000001500");
-        assertThat((String) m.getObjectValue(41)).isEqualTo("TERM01  ");
+        assertThat(m.getType()).isEqualTo(0x200);
+        assertThat(m.getObjectValue(4).toString()).isEqualTo("000000001500");
+        assertThat(m.getObjectValue(41).toString()).isEqualTo("TERM01  ");
         assertThat(m.hasField(11)).isTrue();
-        assertThat((String) m.getObjectValue(49)).isEqualTo("566");
+        assertThat(m.getObjectValue(49).toString()).isEqualTo("566");
     }
 }

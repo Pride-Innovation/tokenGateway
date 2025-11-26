@@ -1,9 +1,9 @@
 package com.pridebank.token.service;
 
+import com.pridebank.token.validation.IsoValidator;
 import com.solab.iso8583.IsoMessage;
 import com.solab.iso8583.IsoType;
 import com.solab.iso8583.MessageFactory;
-import com.pridebank.token.validation.IsoValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,27 +56,29 @@ public class AtmTransactionProcessor {
 
     public IsoMessage createErrorResponse(IsoMessage request, String responseCode, String message) {
         try {
-            int responseMti;
-            IsoMessage response;
-
-            if (request != null) {
-                responseMti = request.getType() + 10; // e.g., 0200 -> 0210
-                response = isoMessageBuilder.createResponseFromRequest(request, responseMti);
-            } else {
-                responseMti = 0x0210;
-                response = messageFactory.newMessage(responseMti);
-            }
-
             String code = (responseCode == null || responseCode.isBlank()) ? "96" : responseCode;
-            response.setValue(39, code, IsoType.ALPHA, 2);
+            String truncated = (message == null) ? "" : truncate(message);
 
-            if (message != null && !message.isBlank()) {
-                String msg = truncate(message);
-                response.setValue(44, msg, IsoType.LLVAR, msg.length());
+            // For validation/format errors (30) use 0231 per spec; otherwise build standard response MTI (+0x10)
+            if ("30".equals(code)) {
+                // isoMessageBuilder.build0231 handles null request via createResponseFromRequest
+                return isoMessageBuilder.build0231(request, code, truncated);
+            } else {
+                IsoMessage response;
+                if (request != null) {
+                    int responseMti = request.getType() + 0x10;
+                    response = isoMessageBuilder.createResponseFromRequest(request, responseMti);
+                } else {
+                    response = messageFactory.newMessage(0x0210);
+                }
+
+                response.setValue(39, code, IsoType.ALPHA, 2);
+                if (!truncated.isBlank()) {
+                    response.setValue(44, truncated, IsoType.LLVAR, truncated.length());
+                }
+
+                return response;
             }
-
-            return response;
-
         } catch (Exception e) {
             throw new RuntimeException("Unable to create error response", e);
         }

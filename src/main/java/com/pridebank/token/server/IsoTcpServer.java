@@ -85,13 +85,25 @@ public class IsoTcpServer {
                     break;
                 }
 
-                IsoMessage request = messageFactory.parseMessage(payload, 0);
-                IsoMessage response = processor.processTransaction(request);
-                byte[] respBytes = response.writeData();
-                out.write((respBytes.length >> 8) & 0xFF);
-                out.write(respBytes.length & 0xFF);
-                out.write(respBytes);
-                out.flush();
+                try {
+                    IsoMessage request = messageFactory.parseMessage(payload, 0);
+                    IsoMessage response = processor.processTransaction(request);
+                    byte[] respBytes = response.writeData();
+                    out.write((respBytes.length >> 8) & 0xFF);
+                    out.write(respBytes.length & 0xFF);
+                    out.write(respBytes);
+                    out.flush();
+                } catch (java.text.ParseException pe) {
+                    // Build minimal 0210 with 39=30 (format error) so client gets a response
+                    IsoMessage errorResp = messageFactory.newMessage(0x210);
+                    errorResp.setValue(39, "30", com.solab.iso8583.IsoType.ALPHA, 2);
+                    byte[] respBytes = errorResp.writeData();
+                    out.write((respBytes.length >> 8) & 0xFF);
+                    out.write(respBytes.length & 0xFF);
+                    out.write(respBytes);
+                    out.flush();
+                    log.error("Parse error from {}: {}", remote, pe.getMessage(), pe);
+                }
             }
         } catch (Exception e) {
             log.error("Client {} handler error", remote, e);
